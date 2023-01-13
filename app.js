@@ -93,15 +93,52 @@ triangles(1,4,5)
 // Exercise 5 Section
 console.log("EXERCISE 5:\n==========\n")
 function cellPhone(planLimit, day, usage) {
-    let a = (planLimit - usage)
-    var b = (30 - day)
-    if (a % b <= 0) 
+    let totaldataLeft = (planLimit - usage)
+    var daysLeft = (30 - day)
+    var daysUsed = (0 + day)
+    var avgdailyUse = (usage / day)
+    var dailyLimit = (planLimit / 30)
+    var actualUse = (avgdailyUse - dailyLimit)
+    var actualdailyLimit = (totaldataLeft / daysLeft)
+    var exceedData = (actualUse * daysLeft)
+    var potentialUse = (dailyLimit - avgdailyUse)
+
+    if(avgdailyUse < dailyLimit){
+        console.log(`${daysUsed} days used, ${daysLeft} days left. 
+            You have only used ${usage} GB of your ${planLimit} GB of monthly allotted data.
+            Average daily use: ${avgdailyUse} GB/day
+            You are using less than your daily limit, which is ${dailyLimit} GB per day, so feel free to use an additional ${potentialUse} GB per day`)
+        }
+    if(totaldataLeft / daysLeft < dailyLimit && totaldataLeft > 0)
     {
-        console.log(`15 days used, 15 days remaining
-        Average daily use: 3.333 GB/day
-        You are EXCEEDING your average daily use (3.73 GB/day),
-        continuing this high usage, you'll exceed your data plan by
-        11.9 GB.
-        To stay below your data plan, use no more than 2.93 GB/day.`)
+        console.log(`${daysUsed} days used, ${daysLeft} days left. 
+        You have already used ${usage} GB of your ${planLimit} GB of monthly allotted data.
+        Average daily use: ${avgdailyUse} GB/day
+        You are EXCEEDING your average (or recommended) daily use by ${actualUse} GB/day,
+        If you continue this high usage, you'll exceed your data plan by
+        ${exceedData} GB.
+        To stay below your data plan, use no more than ${actualdailyLimit} GB/day.`)
     }
+        if(totaldataLeft <0)
+{
+            console.log(`${daysUsed} days used, ${daysLeft} days left. 
+            You have already used ${usage} GB of your ${planLimit} GB of monthly allotted data.
+            Average daily use: ${avgdailyUse} GB/day
+            You have EXCEEDED your average daily use by ${actualUse} GB/day.
+            You've run out of data. Yikes.`)
+    }
+            if(avgdailyUse === dailyLimit){
+                console.log(`${daysUsed} days used, ${daysLeft} days left. 
+                You have used ${usage} GB of your ${planLimit} GB of monthly allotted data.
+                Average daily use: ${avgdailyUse} GB/day
+                You are on target with your average daily use by ${avgdailyUse} GB/day.
+                Great job.`)
+ }
 }
+cellPhone(60,5,40)
+
+cellPhone(60,22,61)
+
+cellPhone (60, 10, 20)
+
+cellPhone(60, 8, 4)
